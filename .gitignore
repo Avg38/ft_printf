@@ -1,0 +1,5 @@
+a.out
+*.o
+*.exe
+libftprintf.h.gch
+/.vscode
