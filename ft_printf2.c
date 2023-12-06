@@ -6,85 +6,69 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:06:09 by avialle-          #+#    #+#             */
-/*   Updated: 2023/12/06 14:17:02 by avialle-         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:00:53 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_print_addr(unsigned long long addr)
+void	ft_print_ptr(unsigned long long addr, size_t *len)
 {
-	char	*base;
-	char	stack[16];
+	char	byte[16];
 	int		i;
-	int		len;
 
-	base = "0123456789abcdef";
-	i = 0;
-	while (i < 16)
+	if (!addr)
+		ft_print_str("(nil)", len);
+	else
 	{
-		stack[i] = base[addr % 16];
-		i++;
-		addr /= 16;
+		i = -1;
+		while (++i < 16)
+		{
+			byte[i] = "0123456789abcdef"[addr % 16];
+			addr /= 16;
+		}
+		i = 15;
+		ft_print_str("0x", len);
+		while (byte[i] == '0')
+			i--;
+		while (i >= 0)
+		{
+			ft_print_char(byte[i], len);
+			i--;
+		}
 	}
-	i = 15;
-	ft_print_char(48);
-	ft_print_char('x');
-	while (stack[i] == '0')
-		i--;
-	i++;
-	len = i + 2;
-	while (stack[--i] != '\0')
-		ft_print_char(stack[i]);
-	return (len);
 }
 
-int	ft_print_ptr(void *str)
-{
-	unsigned char	*addr;
-
-	if (!str)
-	{
-		ft_print_str("(nil)");
-		return (5);
-	}
-	addr = (unsigned char *)str;
-	return (ft_print_addr((unsigned long long)&addr[0]));
-}
-
-void	ft_print_nbr(int nb, int *len)
+void	ft_print_nbr(int nb, size_t *len)
 {
 	if (nb == -2147483648)
 	{
-		write(1, "-2147483648", 1);
-		return ;
+		write(1, "-2147483648", 11);
+		(*len) += 11;
 	}
 	else if (nb < 0)
 	{
 		(*len)++;
-		ft_print_unsigned(-nb, len);
+		write(1, "-", 1);
+		ft_print_nbr(-nb, len);
 	}
 	else if (nb > 9)
 	{
-		ft_print_unsigned(nb / 10, len);
-		ft_print_unsigned(nb % 10, len);
+		ft_print_nbr(nb / 10, len);
+		ft_print_nbr(nb % 10, len);
 	}
 	else
-	{
-		(*len)++;
-		ft_print_char(nb % 10 + 48);
-	}
+		ft_print_char(nb % 10 + 48, len);
 }
 
-void	ft_print_hexa(unsigned int nb, char *base, int *len)
+void	ft_print_hexa(unsigned int nb, char *base, size_t *len)
 {
 	if (nb > 15)
 		ft_print_hexa(nb / 16, base, len);
-	(*len)++;
-	ft_print_char(base[nb % 16]);
+	ft_print_char(base[nb % 16], len);
 }
 
-void	ft_print_unsigned(unsigned int nb, int *len)
+void	ft_print_unsigned(unsigned int nb, size_t *len)
 {
 	if (nb > 9)
 	{
@@ -92,8 +76,5 @@ void	ft_print_unsigned(unsigned int nb, int *len)
 		ft_print_unsigned(nb % 10, len);
 	}
 	else
-	{
-		(*len)++;
-		ft_print_char(nb % 10 + 48);
-	}
+		ft_print_char(nb % 10 + 48, len);
 }
