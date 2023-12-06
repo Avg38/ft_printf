@@ -10,58 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-
-static int	len_nbr(int nb, int len_base)
-{
-	int			len;
-	long int	nb_tmp;
-
-	len = 0;
-	nb_tmp = (long int)nb;
-	if (nb_tmp < 0)
-	{
-		len++;
-		nb_tmp = -nb_tmp;
-	}
-	while (nb_tmp / len_base != 0)
-	{
-		len++;
-		nb_tmp /= len_base;
-	}
-	len++;
-	return (len);
-}
-
-static void	ft_putnbr_base(int nb, char *base, int len_base)
-{
-	if (nb == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return ;
-	}
-	else if (nb < 0)
-	{
-		write(1, "-", 1);
-		ft_putnbr_base(-nb, base, len_base);
-	}
-	else if (nb > len_base)
-	{
-		ft_putnbr_base(nb / len_base, base, len_base);
-		ft_putnbr_base(nb % len_base, base, len_base);
-	}
-	else
-		ft_print_char(base[nb % len_base]);
-}
-
-int	ft_print_nbr(int nb, char *base)
-{
-	int	len_base;
-
-	len_base = ft_strlen(base);
-	ft_putnbr_base(nb, base, len_base);
-	return (len_nbr(nb, len_base));
-}
+#include "ft_printf.h"
 
 static int	len_var(va_list args, const char c)
 {
@@ -69,21 +18,22 @@ static int	len_var(va_list args, const char c)
 
 	len = 0;
 	if (c == 'c')
-		len += ft_print_char(va_arg(args, int));
+		len = ft_print_char(va_arg(args, int));
 	else if (c == 's')
-		len += ft_print_str(va_arg(args, char *));
+		len = ft_print_str(va_arg(args, char *));
 	else if (c == 'p')
-		len += ft_print_ptr(va_arg(args, void *));
+		len = ft_print_ptr(va_arg(args, void *));
 	else if (c == 'd' || c == 'i')
-		len = ft_print_nbr(va_arg(args, int), "0123456789");
+		ft_print_nbr(va_arg(args, int), "0123456789", &len);
 	else if (c == 'u')
-		len = ft_print_nbr(va_arg(args, unsigned int), "0123456789");
+		ft_print_unsigned(va_arg(args, unsigned int), &len);
 	else if (c == 'x')
-		len += ft_print_nbr(va_arg(args, unsigned int), "0123456789abcdef");
+		ft_print_nbr(va_arg(args, unsigned int), "0123456789abcdef", &len);
 	else if (c == 'X')
-		len += ft_print_nbr(va_arg(args, unsigned int), "0123456789ABCDEF");
+		ft_print_nbr(va_arg(args, unsigned int), "0123456789ABCDEF", &len);
 	else if (c == '%')
-		len += ft_print_char(37);
+		len = ft_print_char(37);
+	printf("\n%d\n", len);
 	return (len);
 }
 
@@ -116,34 +66,16 @@ int	ft_printf(const char *str, ...)
 
 int	main(void)
 {
-	char	c = '4';
-	char	*str = "Hello World!";
-	char	*ptr = "Hello World!";
-	int		d = -2147483647;
+	char	c = 'c';
+	char	*str = NULL;
+	char	*ptr = NULL;
+	unsigned int	d = 2147483699;
 	int		i = 2147483647;
-	int		u = 54;
+	unsigned int	u = 2147483699;
 	int		x = 42;
 	int		X = 42;
 
-	ft_printf("ft_printf: %c\n", c);
-	printf("printf: %c\n", c);
-	ft_printf("ft_printf: %s\n", str);
-	printf("printf: %s\n", str);
-	ft_printf("ft_printf: %p\n", &ptr);
-	printf("printf: %p\n", &ptr);
-	ft_printf("ft_printf: %d\n", d);
-	printf("printf: %d\n", d);
-	ft_printf("ft_printf: %i\n", i);
-	printf("printf: %i\n", i);
-	ft_printf("ft_printf: %u\n", u);
-	printf("printf: %u\n", u);
-	ft_printf("ft_printf: %x\n", x);
-	printf("printf: %x\n", x);
-	ft_printf("ft_printf: %X\n", X);
-	printf("printf: %X\n", X);
-	ft_printf("ft_printf: %%\n");
-	printf("printf: %%\n");
-
-
-	
+	// printf("%s\n", str);
+	ft_printf("ft_printf:\n%c\n%s\n%p\n%d\n%i\n%u\n%x\n%X\n%%\n\n", c, str, ptr, d, i, u, x, X);
+	printf("printf:\n%c\n%s\n%p\n%d\n%i\n%u\n%x\n%X\n%%\n", c, str, ptr, d, i, u, x, X);
 }

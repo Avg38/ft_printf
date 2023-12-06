@@ -5,12 +5,12 @@ NAME	= libftprintf.a
 
 CC	= gcc
 
-CFLAGS	= -Wall -Wextra -Werror -I
+CFLAGS	= -Wall -Wextra -Werror -I.
 
 RM	= rm -f
 
-.c.o:	libftprintf.h
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+%.c%.o:	ft_printf.h $<
+		${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
 			ar rc ${NAME} ${OBJS}

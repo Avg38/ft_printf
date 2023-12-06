@@ -10,19 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdio.h>
 
-int	ft_print_char(int c);
-int	ft_print_nbr(int nb, char *base);
-int	ft_print_ptr(void *str);
-int	ft_print_str(char *str);
-int	ft_strlen(char *str);
-int	ft_printf(const char *str, ...);
-int	main(void);
+int		ft_print_char(int c);
+void	ft_print_nbr(int nb, char *base, int *len);
+int		ft_print_ptr(void *str);
+int		ft_print_str(char *str);
+int		ft_strlen(char *str);
+int		ft_printf(const char *str, ...);
+void	ft_print_unsigned(unsigned int nb, int *len);
+// int	main(void);
 
 #endif
