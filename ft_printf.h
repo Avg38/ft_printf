@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:17:59 by avialle-          #+#    #+#             */
-/*   Updated: 2023/12/06 14:15:43 by avialle-         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:01:10 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@
 # include <unistd.h>
 # include <stdio.h>
 
-int		ft_strlen(char *str);
-int		ft_print_char(int c);
-int		ft_print_str(char *str);
-int		ft_print_ptr(void *str);
-void	ft_print_nbr(int nb, int *len);
-void	ft_print_hexa(unsigned int nb, char *base, int *len);
-void	ft_print_unsigned(unsigned int nb, int *len);
+void	ft_print_char(int c, size_t *len);
+void	ft_print_str(char *str, size_t *len);
+void	ft_print_ptr(unsigned long long addr, size_t *len);
+void	ft_print_nbr(int nb, size_t *len);
+void	ft_print_hexa(unsigned int nb, char *base, size_t *len);
+void	ft_print_unsigned(unsigned int nb, size_t *len);
 int		ft_printf(const char *str, ...);
 
 #endif
