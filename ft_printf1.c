@@ -1,16 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:36:42 by avialle-          #+#    #+#             */
-/*   Updated: 2023/11/29 14:36:42 by avialle-         ###   ########.fr       */
+/*   Updated: 2023/12/06 14:22:49 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int	ft_print_char(int c)
+{
+	write(1, &c, 1);
+	return (1);
+}
+
+int	ft_print_str(char *str)
+{
+	int	i;
+
+	if (!str)
+	{
+		ft_print_str("(null)");
+		return (6);
+	}
+	i = 0;
+	while (str[i])
+	{
+		ft_print_char(str[i]);
+		i++;
+	}
+	return (ft_strlen(str));
+}
 
 static int	len_var(va_list args, const char c)
 {
@@ -24,16 +58,16 @@ static int	len_var(va_list args, const char c)
 	else if (c == 'p')
 		len = ft_print_ptr(va_arg(args, void *));
 	else if (c == 'd' || c == 'i')
-		ft_print_nbr(va_arg(args, int), "0123456789", &len);
+		ft_print_nbr(va_arg(args, int), &len);
 	else if (c == 'u')
 		ft_print_unsigned(va_arg(args, unsigned int), &len);
 	else if (c == 'x')
-		ft_print_nbr(va_arg(args, unsigned int), "0123456789abcdef", &len);
+		ft_print_hexa(va_arg(args, unsigned int), "0123456789abcdef", &len);
 	else if (c == 'X')
-		ft_print_nbr(va_arg(args, unsigned int), "0123456789ABCDEF", &len);
+		ft_print_hexa(va_arg(args, unsigned int), "0123456789ABCDEF", &len);
 	else if (c == '%')
 		len = ft_print_char(37);
-	printf("\n%d\n", len);
+	printf("   %d", len);
 	return (len);
 }
 
@@ -64,18 +98,20 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-int	main(void)
-{
-	char	c = 'c';
-	char	*str = NULL;
-	char	*ptr = NULL;
-	unsigned int	d = 2147483699;
-	int		i = 2147483647;
-	unsigned int	u = 2147483699;
-	int		x = 42;
-	int		X = 42;
+// int	main(void)
+// {
+// 	char	c = 'c';
+// 	char	*str = NULL;
+// 	char	*ptr = NULL;
+// 	unsigned int	d = 2147483699;
+// 	int		i = 2147483647;
+// 	unsigned int	u = 2147483699;
+// 	int		x = -365;
+// 	int		X = -365;
 
-	// printf("%s\n", str);
-	ft_printf("ft_printf:\n%c\n%s\n%p\n%d\n%i\n%u\n%x\n%X\n%%\n\n", c, str, ptr, d, i, u, x, X);
-	printf("printf:\n%c\n%s\n%p\n%d\n%i\n%u\n%x\n%X\n%%\n", c, str, ptr, d, i, u, x, X);
-}
+// 	// printf("%s\n", str);
+// 	ft_printf("ft_printf:\n%c\n%s\n%p\n%d
+// 	\n%i\n%u\n%x\n%X\n%%\n\n", c, str, ptr, d, i, u, x, X);
+// 	printf("\nprintf:\n%c\n%s\n%p\n%d
+// 	\n%i\n%u\n%x\n%X\n%%\n", c, str, ptr, d, i, u, x, X);
+// }
