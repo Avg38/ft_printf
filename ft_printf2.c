@@ -18,7 +18,10 @@ void	ft_print_ptr(unsigned long long addr, size_t *len)
 	int		i;
 
 	if (!addr)
+	{
 		ft_print_str("(nil)", len);
+		return ;
+	}
 	else
 	{
 		i = -1;
