@@ -14,10 +14,10 @@ La version personnalisée de `printf` prend en charge un sous-ensemble des spéc
 `%%` : Afficher un '%'
 ## Exemple d'utilisation
 ```c
-#include "my_printf.h"
+#include "ft_printf.h"
 
 int main() {
-    my_printf("Hello, %s! This is a number: %d\n", "World", 42);
+    ft_printf("Hello, %s! This is a number: %d\n", "World", 42);
     return 0;
 }
 ```
