@@ -4,13 +4,13 @@ Ce projet consiste à recréer la fonction `printf` en langage C sans utiliser d
 ## Fonctionnalités
 La version personnalisée de `printf` prend en charge un sous-ensemble des spécificateurs de format de la version standard, notamment :
 
-`%c` : Caractère
-`%s` : Chaîne de caractères
-`%p` : Pointeur
-`%d` et %i : Entier signé
-`%u` : Entier non signé
-`%x` : Entier non signé en hexadécimal (minuscule)
-`%X` : Entier non signé en hexadécimal (majuscule)
+`%c` : Caractère  
+`%s` : Chaîne de caractères  
+`%p` : Pointeur  
+`%d` et `%i` : Entier signé  
+`%u` : Entier non signé  
+`%x` : Entier non signé en hexadécimal (minuscule)  
+`%X` : Entier non signé en hexadécimal (majuscule)  
 `%%` : Afficher un '%'
 ## Exemple d'utilisation
 ```c
