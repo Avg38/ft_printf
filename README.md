@@ -22,7 +22,7 @@ int main() {
 }
 ```
 ## Structure du Projet
-ft_printf1.c : Fichier contenant l'implémentation de la fonction ft_printf ainsi que des fonctions necessaires.
-ft_printf2.c : Fichier contenant le reste des fonctions necessaires.
-ft_printf.h : Fichier d'en-tête déclarant les prototypes de fonctions et les structures nécessaires.
+ft_printf1.c : Fichier contenant l'implémentation de la fonction ft_printf ainsi que des fonctions necessaires.  
+ft_printf2.c : Fichier contenant le reste des fonctions necessaires.  
+ft_printf.h : Fichier d'en-tête déclarant les prototypes de fonctions et les structures nécessaires.  
 Makefile : Fichier pour la compilation du projet.
