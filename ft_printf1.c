@@ -78,19 +78,3 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return ((int)len);
 }
-
-// int	main(void)
-// {
-// 	char	c = 'c';
-// 	char	*str = NULL;
-// 	char	*ptr = "NULL";
-// 	unsigned int	d = 2147483699;
-// 	int		i = 2147483647;
-// 	unsigned int	u = 2147483699;
-// 	int		x = -365;
-// 	int		X = -365;
-
-// 	// printf("%s\n", str);
-// 	printf("%d", ft_printf("%c\n%s\n%p\n%d\n%i\n%u\n%x\n%X\n", c, str, ptr, d, i, u, x, X));
-// 	// printf("%d", printf("%c%s%p%d%i%u%x%X%z%", c, str, ptr, d, i, u, x, X));
-// }
