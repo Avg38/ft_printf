@@ -45,14 +45,10 @@ void	ft_print_ptr(unsigned long long addr, size_t *len)
 void	ft_print_nbr(int nb, size_t *len)
 {
 	if (nb == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		(*len) += 11;
-	}
+		ft_print_str("-2147483648", len);
 	else if (nb < 0)
 	{
-		(*len)++;
-		write(1, "-", 1);
+		ft_print_char(45, len);
 		ft_print_nbr(-nb, len);
 	}
 	else if (nb > 9)
