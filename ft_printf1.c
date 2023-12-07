@@ -23,7 +23,10 @@ void	ft_print_str(char *str, size_t *len)
 	size_t	i;
 
 	if (!str)
-		return (ft_print_str("(null)", len));
+	{
+		ft_print_str("(null)", len);
+		return ;
+	}
 	i = 0;
 	while (str[i])
 	{
